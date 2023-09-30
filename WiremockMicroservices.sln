@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33414.496
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{87AFFD90-693F-490D-AD11-690DF7C4FA5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WiremockMicroservices", "WiremockMicroservices\WiremockMicroservices.csproj", "{9AF53591-ED37-4161-9727-B102D26BEBEB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{62019C58-D7F8-457A-A808-90779A5C54C2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WiremockMicroservices", "src\WiremockMicroservices\WiremockMicroservices.csproj", "{0F94142C-2940-4DB0-823C-30DFD08C97D1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WiremockMicroservices.Examples.WebApplication", "examples\WiremockMicroservices.Examples.WebApplication\WiremockMicroservices.Examples.WebApplication.csproj", "{518A4D0F-8874-4EF6-A6F5-5DB1A6757679}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9AF53591-ED37-4161-9727-B102D26BEBEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AF53591-ED37-4161-9727-B102D26BEBEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AF53591-ED37-4161-9727-B102D26BEBEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AF53591-ED37-4161-9727-B102D26BEBEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F94142C-2940-4DB0-823C-30DFD08C97D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F94142C-2940-4DB0-823C-30DFD08C97D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F94142C-2940-4DB0-823C-30DFD08C97D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F94142C-2940-4DB0-823C-30DFD08C97D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{518A4D0F-8874-4EF6-A6F5-5DB1A6757679}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{518A4D0F-8874-4EF6-A6F5-5DB1A6757679}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{518A4D0F-8874-4EF6-A6F5-5DB1A6757679}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{518A4D0F-8874-4EF6-A6F5-5DB1A6757679}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0F94142C-2940-4DB0-823C-30DFD08C97D1} = {62019C58-D7F8-457A-A808-90779A5C54C2}
+		{518A4D0F-8874-4EF6-A6F5-5DB1A6757679} = {87AFFD90-693F-490D-AD11-690DF7C4FA5F}
+	EndGlobalSection
+EndGlobal
