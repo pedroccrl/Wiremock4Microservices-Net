@@ -12,7 +12,7 @@ public static class ApplicationBuilderExtensions
     public static void UseWiremockEndpoints(this IApplicationBuilder app)
     {
         var wiremockService = app.ApplicationServices.GetRequiredService<IWireMockService>();
-        
+
         wiremockService.Start();
 
         var endpointRequestMatcherType = typeof(IWiremockEndpoint);

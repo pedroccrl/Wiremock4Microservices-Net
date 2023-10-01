@@ -15,7 +15,7 @@ public static class ServiceCollectionExtensions
         services.Configure<WireMockServerSettings>(configuration.GetSection(nameof(WireMockServerSettings)));
 
         WiremockContext.AssembliesEndpoints = assemblies;
-        
+
         services
             .Scan(scan => scan
                 .FromAssemblies(assemblies)
@@ -25,7 +25,7 @@ public static class ServiceCollectionExtensions
             );
 
         services.AddSingleton<IWireMockService, WireMockService>();
-        
+
         return services;
     }
 }

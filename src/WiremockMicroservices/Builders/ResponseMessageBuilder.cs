@@ -13,6 +13,11 @@ public class ResponseMessageBuilder
         Headers = new Dictionary<string, WireMockList<string>>()
     };
 
+    public static ResponseMessageBuilder Create()
+    {
+        return new ResponseMessageBuilder();
+    }
+
     public ResponseMessageBuilder WithStatusCode(HttpStatusCode statusCode)
     {
         _response.StatusCode = statusCode;
@@ -33,11 +38,11 @@ public class ResponseMessageBuilder
 
         return _response;
     }
-    
+
     public ResponseMessage BuildWithJsonBody(object data, JsonSerializerSettings jsonSerializerSettings)
     {
         var dataJson = JsonConvert.SerializeObject(data, jsonSerializerSettings);
-        
+
         _response.BodyData = new BodyData
         {
             BodyAsString = dataJson,
@@ -46,13 +51,24 @@ public class ResponseMessageBuilder
 
         return _response;
     }
-    
+
     public ResponseMessage BuildWithJsonBody(object data)
     {
         _response.BodyData = new BodyData
         {
             BodyAsJson = data,
             DetectedBodyType = BodyType.Json
+        };
+
+        return _response;
+    }
+
+    public ResponseMessage BuildWithText(string text)
+    {
+        _response.BodyData = new BodyData
+        {
+            BodyAsString = text,
+            DetectedBodyType = BodyType.String
         };
 
         return _response;

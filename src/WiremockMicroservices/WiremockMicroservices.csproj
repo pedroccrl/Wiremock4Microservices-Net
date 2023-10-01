@@ -7,13 +7,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Scrutor" Version="4.2.2" />
-      <PackageReference Include="WireMock.Net" Version="1.5.37" />
+        <PackageReference Include="Scrutor" Version="4.2.2"/>
+        <PackageReference Include="WireMock.Net" Version="1.5.37"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Remove="Endpoints\IWiremockEndpointRequestMatcher.cs" />
-      <Compile Remove="MicroserviceMockFactory.cs" />
+        <Compile Remove="Endpoints\IWiremockEndpointRequestMatcher.cs"/>
+        <Compile Remove="MicroserviceMockFactory.cs"/>
     </ItemGroup>
 
 </Project>
