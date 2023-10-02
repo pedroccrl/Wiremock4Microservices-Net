@@ -2,7 +2,7 @@
 WireMock4Microservices.Net is a .Net library built on top of [WireMock.Net](https://github.com/WireMock-Net/WireMock.Net). It enhances support for mocked requests by injecting one or more services and extends WireMock's features using the original Callback Response.
 
 ## :question: Why 4Microservices? 
-It's common behavior for microservices to share contracts, SDKs, and messages among themselves. While WireMock supports webhooks, it cannot send or consume messages from queues or topics. By implementing the IWiremockEndpoint (see the "Using" section), it becomes possible to inject any service and create the expected behavior for simple or more complex scenarios.
+It's common behavior for microservices to share contracts, SDKs, and messages among themselves. While WireMock supports webhooks, it cannot send or consume messages from queues or topics. By implementing the `IWiremockEndpoint` (see the "Using" [section](https://github.com/pedroccrl/Wiremock4Microservices-Net#page_facing_up-using)), it becomes possible to inject any service and create the expected behavior for simple or more complex scenarios.
 
 ## :page_facing_up: Using
 To begin creating mocked endpoints, implement the `IWiremockEndpoint` or inherit from `WiremockEndpoint` to start creating mocked endpoints as follows:
