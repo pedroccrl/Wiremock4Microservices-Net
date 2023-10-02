@@ -1,9 +1,11 @@
 using WireMock.Matchers.Request;
+using WireMock.Models;
+using WiremockMicroservices.Endpoints;
 
 namespace WiremockMicroservices.Services;
 
 internal interface IWireMockService
 {
     void Start();
-    void AddEndpoint(IRequestMatcher requestMatcher, Type callbackHandlerEndpointType);
+    void AddEndpoint(IWiremockEndpoint wiremockEndpoint);
 }

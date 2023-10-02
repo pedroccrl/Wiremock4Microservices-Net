@@ -1,8 +1,10 @@
 using WireMock.Matchers.Request;
+using WireMock.Models;
 
 namespace WiremockMicroservices.Endpoints;
 
 public interface IWiremockEndpoint : IWiremockEndpointCallbackHandler
 {
-    static abstract IRequestMatcher RequestMatcher { get; }
+    IRequestMatcher RequestMatcher { get; }
+    IWebhook[] Webhooks { get; }
 }

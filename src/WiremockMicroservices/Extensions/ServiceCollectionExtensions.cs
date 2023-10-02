@@ -19,7 +19,7 @@ public static class ServiceCollectionExtensions
         services
             .Scan(scan => scan
                 .FromAssemblies(assemblies)
-                .AddClasses(classes => classes.AssignableTo<IWiremockEndpointCallbackHandler>())
+                .AddClasses(classes => classes.AssignableTo<IWiremockEndpoint>())
                 .AsSelf()
                 .WithScopedLifetime()
             );

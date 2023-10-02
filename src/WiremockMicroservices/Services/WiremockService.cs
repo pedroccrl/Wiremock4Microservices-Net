@@ -3,8 +3,10 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using WireMock.Matchers.Request;
+using WireMock.Models;
 using WireMock.Server;
 using WireMock.Settings;
+using WiremockMicroservices.Endpoints;
 using WiremockMicroservices.Logging;
 using WiremockMicroservices.ResponseProviders;
 
@@ -15,7 +17,7 @@ internal class WireMockService : IWireMockService, IDisposable
     private readonly ILogger _logger;
     private readonly IServiceScopeFactory _scopeFactory;
     private readonly WireMockServerSettings _settings;
-    private WireMockServer _server;
+    private WireMockServer? _server;
 
     public WireMockService(
         ILogger<WireMockService> logger,
@@ -39,11 +41,19 @@ internal class WireMockService : IWireMockService, IDisposable
         _logger.LogInformation($"WireMock.Net server settings {JsonConvert.SerializeObject(_settings)}");
     }
 
-    public void AddEndpoint(IRequestMatcher requestMatcher, Type callbackHandlerEndpointType)
+    public void AddEndpoint(IWiremockEndpoint wiremockEndpoint)
     {
-        _server
-            .Given(requestMatcher)
-            .RespondWith(new DependencyInjectionEndpointResponseProvider(_scopeFactory, callbackHandlerEndpointType));
+        var mockBuilder = _server
+            .Given(wiremockEndpoint.RequestMatcher);
+
+        if (wiremockEndpoint.Webhooks.Length > 0)
+        {
+            mockBuilder
+                .WithWebhook(wiremockEndpoint.Webhooks)
+                .WithWebhookFireAndForget(true);
+        }
+            
+        mockBuilder.RespondWith(new DependencyInjectionEndpointResponseProvider(_scopeFactory, wiremockEndpoint.GetType()));
     }
     
     public void Dispose()

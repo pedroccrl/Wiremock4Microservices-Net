@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using WireMock.Matchers.Request;
+using WireMock.Models;
 using WiremockMicroservices.Endpoints;
 using WiremockMicroservices.Services;
 
@@ -22,15 +23,13 @@ public static class ApplicationBuilderExtensions
             .SelectMany(x => x.GetTypes())
             .Where(t => endpointRequestMatcherType.IsAssignableFrom(t));
 
+        using var scope = app.ApplicationServices.CreateScope();
+        
         foreach (var endpointType in endpoints)
         {
-            var endpointRequestMatcherPropertyInfo = endpointType
-                .GetProperty(nameof(IWiremockEndpoint.RequestMatcher),
-                    BindingFlags.Public | BindingFlags.Static);
-
-            var requestMatcher = (IRequestMatcher)endpointRequestMatcherPropertyInfo.GetValue(null, null);
-
-            wiremockService.AddEndpoint(requestMatcher, endpointType);
+            var endpoint = (IWiremockEndpoint)scope.ServiceProvider.GetRequiredService(endpointType);
+            
+            wiremockService.AddEndpoint(endpoint);
         }
     }
 }
