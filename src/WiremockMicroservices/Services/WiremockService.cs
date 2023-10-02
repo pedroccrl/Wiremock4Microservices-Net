@@ -7,6 +7,7 @@ using WireMock.Models;
 using WireMock.Server;
 using WireMock.Settings;
 using WiremockMicroservices.Endpoints;
+using WiremockMicroservices.Exceptions;
 using WiremockMicroservices.Logging;
 using WiremockMicroservices.ResponseProviders;
 
@@ -38,15 +39,20 @@ internal class WireMockService : IWireMockService, IDisposable
 
         _server = WireMockServer.Start(_settings);
 
-        _logger.LogInformation($"WireMock.Net server settings {JsonConvert.SerializeObject(_settings)}");
+        _logger.LogInformation("WireMock.Net server settings {settings}", JsonConvert.SerializeObject(_settings));
     }
 
     public void AddEndpoint(IWiremockEndpoint wiremockEndpoint)
     {
+        if (_server is null)
+        {
+            throw new WiremockServerNotStartedException();
+        }
+        
         var mockBuilder = _server
             .Given(wiremockEndpoint.RequestMatcher);
 
-        if (wiremockEndpoint.Webhooks.Length > 0)
+        if (wiremockEndpoint.Webhooks?.Length > 0)
         {
             mockBuilder
                 .WithWebhook(wiremockEndpoint.Webhooks)
@@ -59,7 +65,7 @@ internal class WireMockService : IWireMockService, IDisposable
     public void Dispose()
     {
         _logger.LogInformation("WireMock.Net server stopping");
-        _server.Stop();
-        _server.Dispose();
+        _server?.Stop();
+        _server?.Dispose();
     }
 }
