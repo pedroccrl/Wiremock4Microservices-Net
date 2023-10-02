@@ -1,11 +1,11 @@
 # WireMock4Microservices.Net
-A WireMock .Net library based on [WireMock.Net](https://github.com/WireMock-Net/WireMock.Net) which adds support for mocked requests by injecting one or more services and extends the features of WireMock using the original Callback Response.
+WireMock4Microservices.Net is a .Net library built on top of [WireMock.Net](https://github.com/WireMock-Net/WireMock.Net). It enhances support for mocked requests by injecting one or more services and extends WireMock's features using the original Callback Response.
 
 ## :question: Why 4Microservices? 
-Its a common behaviour of microservices to share the contracts, SDKs and messages between them. The WireMock supports Webhooks but cant send or consume messages of queues or topics. By implementing the IWiremockEndpoint (see the Using section), its possible to inject any service and create the expected behaviour.
+It's common behavior for microservices to share contracts, SDKs, and messages among themselves. While WireMock supports webhooks, it cannot send or consume messages from queues or topics. By implementing the IWiremockEndpoint (see the "Using" section), it becomes possible to inject any service and create the expected behavior for simple or more complex scenarios.
 
 ## :page_facing_up: Using
-Implement the `IWiremockEndpoint` or inherit from `WiremockEndpoint` to start creating mocked endpoints. Looks like this:
+To begin creating mocked endpoints, implement the `IWiremockEndpoint` or inherit from `WiremockEndpoint` to start creating mocked endpoints as follows:
 ```csharp
 class MyFakeEndpoint : IWiremockEndpoint
 {
@@ -20,13 +20,13 @@ class MyFakeEndpoint : IWiremockEndpoint
 ```
 
 ### RequestMatcher Property
-First create the Request Matching on property `RequestMatcher`. See the WireMock.Net [documentation](https://github.com/WireMock-Net/WireMock.Net/wiki/Request-Matching) for more details.
+Start by defining the request matching criteria within the `RequestMatcher` property. For more details, refer to the WireMock.Net [documentation](https://github.com/WireMock-Net/WireMock.Net/wiki/Request-Matching).
 
 ### Webhooks Property
-Optional property to configure the Webhooks. See the WireMock.Net [documentation](https://github.com/WireMock-Net/WireMock.Net/wiki/Webhook) for more details.
+The Webhooks property is optional and allows you to configure webhooks. Further information can be found in the WireMock.Net [documentation](https://github.com/WireMock-Net/WireMock.Net/wiki/Webhook).
 
 ### CallbackHandler Method
-The method responsible for generate the response based on RequestMessage, here you can use the original IRequestMessage and uses services to create more complex scenarios.
+The `CallbackHandler` method is responsible for generating the response based on the `RequestMessage`. You can use the original `IRequestMessage` and utilize services to create more complex scenarios. Here are examples of different response types:
 
 #### Single text
 ```csharp
@@ -88,8 +88,8 @@ public class PostOrdersCheckoutWillReturnAccepted : WiremockEndpoint
 }
 ```
 
-## Using on ASP.NET Web
-All you need to is call two methods on your Program or Startup file:
+## Using with ASP.NET Web
+To use WireMock4Microservices.Net with ASP.NET Web, you need to perform two steps in your Program or Startup file:
 
 ```csharp
 var builder = WebApplication.CreateBuilder(args);
@@ -101,8 +101,10 @@ var services = builder.Services;
 services.AddWiremockEndpoints(configuration, Assembly.GetExecutingAssembly());
 ```
 
-The Assembly param on `AddWiremockEndpoints` method is where your implementations of `IWiremockEndpoint` is. By reflection, all implementations will be created using the `WireMockServer` singleton instance.
-And finally, using the `IApplicationBuilder`, call the method above:
+In the `AddWiremockEndpoints` method, the `Assembly` parameter specifies where your implementations of `IWiremockEndpoint` are located. Through reflection, all implementations will be created using the `WireMockServer` singleton instance. Finally, use the `IApplicationBuilder` to call the following method:
+
 ```csharp
 app.UseWiremockEndpoints();
 ```
+
+This setup enables WireMock4Microservices.Net within your ASP.NET Web application.
