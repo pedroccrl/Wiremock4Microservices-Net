@@ -101,7 +101,10 @@ var services = builder.Services;
 services.AddWiremockEndpoints(configuration, Assembly.GetExecutingAssembly());
 ```
 
-In the `AddWiremockEndpoints` method, the `Assembly` parameter specifies where your implementations of `IWiremockEndpoint` are located. Through reflection, all implementations will be created using the `WireMockServer` singleton instance. Finally, use the `IApplicationBuilder` to call the following method:
+In the `AddWiremockEndpoints` method, the `Assembly` parameter specifies where your implementations of `IWiremockEndpoint` are located. Through reflection, all implementations will be created using the `WireMockServer` singleton instance. 
+The `IConfiguration` is used to get the `WireMockServerSettings`, see the WireMock.Net [documentation](https://github.com/WireMock-Net/WireMock.Net/wiki/Settings) for more information.
+
+Finally, use the `IApplicationBuilder` to call the following method:
 
 ```csharp
 app.UseWiremockEndpoints();
