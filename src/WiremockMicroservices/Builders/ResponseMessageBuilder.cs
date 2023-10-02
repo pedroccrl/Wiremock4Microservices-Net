@@ -21,7 +21,7 @@ public class ResponseMessageBuilder
     public ResponseMessageBuilder WithStatusCode(HttpStatusCode statusCode)
     {
         _response.StatusCode = statusCode;
-
+        
         return this;
     }
 
