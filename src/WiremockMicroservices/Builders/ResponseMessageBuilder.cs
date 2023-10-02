@@ -1,4 +1,5 @@
 using System.Net;
+using System.Text;
 using Newtonsoft.Json;
 using WireMock;
 using WireMock.Types;
@@ -14,9 +15,7 @@ public class ResponseMessageBuilder
     };
 
     public static ResponseMessageBuilder Create()
-    {
-        return new ResponseMessageBuilder();
-    }
+        => new();
 
     public ResponseMessageBuilder WithStatusCode(HttpStatusCode statusCode)
     {
@@ -25,9 +24,16 @@ public class ResponseMessageBuilder
         return this;
     }
 
-    public ResponseMessageBuilder WithHeader(string key, string value)
+    public ResponseMessageBuilder WithHeader(string key, string value, bool replace = true)
     {
-        _response.AddHeader(key, value);
+        if (_response.Headers!.ContainsKey(key) && replace)
+        {
+            _response.Headers[key] = value;
+        }
+        else
+        {
+            _response.AddHeader(key, value);
+        }
 
         return this;
     }
@@ -39,7 +45,7 @@ public class ResponseMessageBuilder
         return _response;
     }
 
-    public ResponseMessage BuildWithJsonBody(object data, JsonSerializerSettings jsonSerializerSettings)
+    public ResponseMessage BuildWithDataAsJson(object data, JsonSerializerSettings jsonSerializerSettings)
     {
         var dataJson = JsonConvert.SerializeObject(data, jsonSerializerSettings);
 
@@ -48,17 +54,21 @@ public class ResponseMessageBuilder
             BodyAsString = dataJson,
             DetectedBodyType = BodyType.Json
         };
+        
+        WithHeader("Content-Type", "application/json");
 
         return _response;
     }
 
-    public ResponseMessage BuildWithJsonBody(object data)
+    public ResponseMessage BuildWithDataAsJson(object data)
     {
         _response.BodyData = new BodyData
         {
             BodyAsJson = data,
             DetectedBodyType = BodyType.Json
         };
+        
+        WithHeader("Content-Type", "application/json");
 
         return _response;
     }
@@ -70,6 +80,22 @@ public class ResponseMessageBuilder
             BodyAsString = text,
             DetectedBodyType = BodyType.String
         };
+        
+        WithHeader("Content-Type", "text/plain");
+
+        return _response;
+    }
+    
+    public ResponseMessage BuildWithStringAsJson(string json)
+    {
+        _response.BodyData = new BodyData
+        {
+            BodyAsString = json,
+            DetectedBodyType = BodyType.String,
+            Encoding = Encoding.UTF8
+        };
+
+        WithHeader("Content-Type", "application/json");
 
         return _response;
     }
