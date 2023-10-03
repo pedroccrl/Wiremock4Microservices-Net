@@ -6,19 +6,19 @@ using WireMock.RequestBuilders;
 using WiremockMicroservices.Builders;
 using WiremockMicroservices.Endpoints;
 
-namespace WiremockMicroservices.Examples.WebApplication.Endpoints;
+namespace WiremockMicroservices.UnitTests;
 
-public class JsonObjectEndpoint : IWiremockEndpoint
+public class FakeEndpoint : WiremockEndpoint
 {
-    public IRequestMatcher RequestMatcher
+    public override IRequestMatcher RequestMatcher
         => Request.Create().UsingGet().WithPath("/json-object");
 
-    public IWebhook[] Webhooks => Array.Empty<IWebhook>();
+    public override IWebhook[] Webhooks => Array.Empty<IWebhook>();
 
-    public async Task<ResponseMessage> CallbackHandler(IRequestMessage requestMessage)
+    public override async Task<ResponseMessage> CallbackHandler(IRequestMessage requestMessage)
     {
         await Task.Delay(1);
-        
+
         var response = new ResponseMessageBuilder()
             .WithStatusCode(HttpStatusCode.OK)
             .BuildWithDataAsJson(new
