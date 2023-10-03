@@ -3,7 +3,6 @@
     <PropertyGroup>
         <Authors>Pedro Robuste</Authors>
         <Company>pedroccrl</Company>
-        <VersionPrefix>0.0.1</VersionPrefix>
         <RepositoryUrl>https://github.com/pedroccrl/Wiremock4Microservices-Net</RepositoryUrl>
 
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
@@ -17,7 +16,7 @@
         <PackRelease>true</PackRelease>
         <RootNamespace>WiremockMicroservices</RootNamespace> <!-- Your project namespace stays the same -->
         <AssemblyName>WireMock4Microservices.Net</AssemblyName>
-        <Version>0.1.0-preview</Version>
+        <Version>0.1.1-preview</Version>
         <Title>WireMock4Microservices.Net</Title>
         <PackageProjectUrl>https://github.com/pedroccrl/Wiremock4Microservices-Net</PackageProjectUrl>
         <Description>Built upon WireMock.Net, this library enhances its capabilities by enabling support for injected services, allowing the creation of both simple and intricate scenarios.</Description>
