@@ -1,0 +1,40 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: .NET
+
+on:
+  push:
+    branches: 
+    - main
+
+jobs:
+  build:
+  
+    name: Test, Pack and Publish
+
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./src
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 7.0.x
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+  
+    - name: Test
+      run: dotnet test WiremockMicroservices.UnitTests --verbosity quiet
+
+    - name: Build
+      run: dotnet build WiremockMicroservices --configuration Release
+        
+    - name: Pack 
+      run: dotnet pack WiremockMicroservices --output .
+
+    - name: Push Nuget Packages
+      run: dotnet nuget push WireMock4Microservices.Net*.nupkg -k ${{ secrets.NUGET_TOKEN }} -s https://api.nuget.org/v3/index.json
