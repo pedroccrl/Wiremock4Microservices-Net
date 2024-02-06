@@ -99,4 +99,18 @@ public class ResponseMessageBuilder
 
         return _response;
     }
+
+    public ResponseMessage BuildWithStringAsXml(string xml, string contentType = "application/xml; charset=utf-8")
+    {
+        _response.BodyData = new BodyData
+        {
+            BodyAsString = xml,
+            DetectedBodyType = BodyType.String,
+            Encoding = Encoding.UTF8
+        };
+
+        WithHeader("Content-Type", contentType);
+
+        return _response;
+    }
 }

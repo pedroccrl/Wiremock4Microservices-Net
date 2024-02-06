@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <Authors>Pedro Robuste</Authors>
@@ -16,21 +16,21 @@
         <PackRelease>true</PackRelease>
         <RootNamespace>WiremockMicroservices</RootNamespace> <!-- Your project namespace stays the same -->
         <AssemblyName>WireMock4Microservices.Net</AssemblyName>
-        <Version>0.1.1</Version>
+        <Version>0.1.2</Version>
         <Title>WireMock4Microservices.Net</Title>
         <PackageProjectUrl>https://github.com/pedroccrl/Wiremock4Microservices-Net</PackageProjectUrl>
         <Description>Built upon WireMock.Net, this library enhances its capabilities by enabling support for injected services, allowing the creation of both simple and intricate scenarios.</Description>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All"/>
-        <PackageReference Include="Scrutor" Version="4.2.2"/>
-        <PackageReference Include="WireMock.Net" Version="1.5.37"/>
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+        <PackageReference Include="Scrutor" Version="4.2.2" />
+        <PackageReference Include="WireMock.Net" Version="1.5.47" />
     </ItemGroup>
 
     <ItemGroup>
-        <Compile Remove="Endpoints\IWiremockEndpointRequestMatcher.cs"/>
-        <Compile Remove="MicroserviceMockFactory.cs"/>
+        <Compile Remove="Endpoints\IWiremockEndpointRequestMatcher.cs" />
+        <Compile Remove="MicroserviceMockFactory.cs" />
     </ItemGroup>
 
 </Project>
